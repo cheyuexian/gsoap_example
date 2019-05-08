@@ -1,0 +1,8 @@
+gSOAP官方提供的、已编译好的wsdl2h默认是禁用SSL/TLS的，所以不支持HTTPS下载WSDL文件。至少我的版本gsoap_2.8.45是如此，未来的版本会如何只能靠大家自己尝试。根据出错的提示信息，有两种解决办法：
+
+重新编译gSOAP源码，生成带SSL/TLS的wsdl2h工具。
+自己手动下载WSDL文档后，再用本地WSDL文档执行wsdl2h命令。
+网上很多教程有提到使用第2种方法，这对其他的WSDL文档可能合适，但对ONVIF的WSDL不合适，ONVIF的WSDL文档会依赖其他WSDL和xsd文档，依赖关系隐藏在每个WSDL文档中，一般人很难厘清这里面复杂的依赖关系，容易出错，也整不清楚xsd文件该从哪里下载。
+
+所以这里推荐用第1种方法，如何编译gSOAP源码，以便得到开启SSL/TLS的wsdl2h，不同版本的gSOAP方法不同，具体要参考对应gSOAP版本中的INSTALL.txt文件说明。
+https://blog.csdn.net/benkaoya/article/details/72466827
