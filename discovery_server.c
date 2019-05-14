@@ -18,7 +18,7 @@ char  g_scopes[] = "onvif://www.onvif.org/Profile/Streaming \
 char  g_scopes[] = "onvif://www.onvif.org/name/IPCAM";
 
 int main(int argc, char * argv[]) {
-	SOAP_SOCKET m, s;
+	SOAP_SOCKET m, s=0;
 	struct soap soap;
 
 	soap_init1(&soap, SOAP_IO_UDP);
@@ -116,10 +116,12 @@ soap_wsdd_mode wsdd_event_Probe(struct soap *soap, const char *MessageID,
 	soap->header->wsa__RelatesTo->__anyAttribute = NULL;
 	soap->header->wsa__Action = "http://schemas.xmlsoap.org/ws/2005/04/discovery/ProbeMatches";
 	soap->header->wsa__ReplyTo = NULL;
-
+	
+	//"urn:uuid:464A4854-4656-5242-4530-313035394100",
+		
 	soap_wsdd_init_ProbeMatches(soap, matches);
 	soap_wsdd_add_ProbeMatch(soap, matches,
-				"urn:uuid:464A4854-4656-5242-4530-313035394100",
+		soap_wsa_rand_uuid(soap),
 				"tdn:NetworkVideoTransmitter", g_scopes,
 				NULL,
 				"http://192.168.1.2:8080/onvif/device_service",
